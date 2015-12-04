@@ -23,18 +23,23 @@
         <ul class="list-group">
           <li ng-repeat="user in searchCtrl.searchResult.items">
             <img ng-src="{{user.avatar_url}}&s=50">
-            <p ng-model='searchCtrl.username' ng-click='searchCtrl.reveal(user) && searchCtrl.apiCall(user.url)'>{{user.login}}</p>
+            <p ng-model='searchCtrl.username' ng-click='searchCtrl.apiCall(user.url) ; searchCtrl.reveal(user)'>{{user.login}}</p>
             <ul ng-show='searchCtrl.isRevealed(user)' class='nav nav-pills'>
               <li ng-class='{ active: searchCtrl.isActive(1) }' ng-click='searchCtrl.setTab(1)'>User Info</p></li>
               <li ng-class='{ active: searchCtrl.isActive(2) }' ng-click='searchCtrl.setTab(2)'>Repos</p></li>
               <li ng-class='{ active: searchCtrl.isActive(3) }' ng-click='searchCtrl.setTab(3)'>Commits</p></li>
             </ul>
-
-                <div ng-show='searchCtrl.isActive(1)'>
-                  <p>Real name: {{user.name}}</p>
-                  <p>Repo count: {{user.public_repos}}</p>
-                  <p>Location: {{user.location}}</p>
-                </div>
+              <div ng-show='searchCtrl.isActive(1)'>
+                <p>Real name: {{user.name}}</p>
+                <p>Location: {{user.location}}</p>
+              </div>
+              <div ng-show='searchCtrl.isActive(2)'>
+                <p>Repo count: {{user.public_repos}}</p>
+                <p>Repo Link:<a ng-href="{{user.repos_url">{{user.repos_url}}</a></p>
+              </div>
+              <div ng-show='searchCtrl.isActive(3)'>
+                <p>Score: {{user.name}}</p>
+              </div>
 
           </li>
         </ul>
