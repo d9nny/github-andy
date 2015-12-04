@@ -1,7 +1,6 @@
 githubUserSearch.factory('Search', ['$http', function($http) {
 
   var queryUrl = 'https://api.github.com/search/users';
-  var revealUrl = 'https://api.github.com/users/';
   return {
     query: function(searchTerm) {
       return $http({
@@ -13,9 +12,9 @@ githubUserSearch.factory('Search', ['$http', function($http) {
       });
     },
 
-    reveal: function(userObj) {
+    reveal: function(url) {
       return $http({
-        url: revealUrl + userObj.login,
+        url: url,
         method: 'GET'
       });
     }

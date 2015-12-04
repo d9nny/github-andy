@@ -20,24 +20,56 @@ describe('factory: Search', function() {
     search = Search;
   }));
 
-  beforeEach(inject(function($httpBackend) {
-    httpBackend = $httpBackend
-    httpBackend
-      .when("GET", "https://api.github.com/search/users?q=hello")
-      .respond(
-        { items: items }
-      );
-  }));
+  context('Initial api call', function() {
+    beforeEach(inject(function($httpBackend) {
+      httpBackend = $httpBackend
+      httpBackend
+        .when("GET", "https://api.github.com/search/users?q=hello")
+        .respond(
+          { items: items }
+        );
+    }));
 
-  it('responds to query', function() {
-    expect(search.query).toBeDefined();
+    it('responds to query', function() {
+      expect(search.query).toBeDefined();
+    });
+
+    it('returns search results', function() {
+      search.query('hello')
+        .then(function(response) {
+          expect(response.data.items).toEqual(items)
+        })
+      httpBackend.flush();
+    });
   });
 
-  it('returns search results', function() {
-    search.query('hello')
-      .then(function(response) {
-        expect(response.data.items).toEqual(items)
-      })
-    httpBackend.flush();
+
+
+  context('Detailed api call', function() {
+    beforeEach(inject(function(userObj) {
+      obj = userObj;
+    }));
+
+    beforeEach(inject(function($httpBackend) {
+      httpBackend = $httpBackend
+      httpBackend
+        .when("GET", "https://api.github.com/users/")
+        .respond(
+          { items: items }
+        );
+    }));
+
+    it('responds to query', function() {
+      expect(obj.login).toBeDefined();
+    });
+
+    it('returns search results', function() {
+      obj.login('hello')
+        .then(function(response) {
+          expect(response.data.items).toEqual(items)
+        })
+      httpBackend.flush();
+    });
   });
+    
 });

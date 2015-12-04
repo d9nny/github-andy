@@ -25,10 +25,14 @@
             <img ng-src="{{user.avatar_url}}&s=50">
             <p ng-model='searchCtrl.username' ng-click='searchCtrl.reveal(user)'>{{user.login}}</p>
             <section ng-show='searchCtrl.isRevealed(user)'>
-              <p>Real name: {{user.name}}</p>
+              <p ng-click='searchCtrl.picked(user.url)'>Repo Info</p>
+                <section ng-show='searchCtrl.revealOne(user.url)'>
+                  Number of repo's: {{user.public_repos}}
+                </section>
+<!--               <p>Real name: {{user.name}}</p>
               <p>Repo count: {{user.public_repos}}</p>
               <p>Location: {{user.location}}</p>
-              <p>Email: {{user.email}}</p>
+              <p>Email: {{user.email}}</p> -->
             </section>
           </li>
         </ul>
