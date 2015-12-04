@@ -6,22 +6,18 @@ githubUserSearch.controller('GitUserSearchController', ['Search', function(Searc
     Search.query(self.searchTerm)
       .then(function(response) {
         self.searchResult = response.data;
-        self.extendSearchData(self.searchResult);
-        console.log(response.data);
+        console.log(self.searchResult);
       })
     };
 
-  self.doDelve = function(userObj) {
-    Search.delve(userObj)
+  self.reveal = function(userObj) {
+    self.currentReveal = userObj
+    Search.reveal(userObj)
       .then(function(response) {
         angular.extend(userObj, response.data);
       })
-  };
-
-  self.extendSearchData = function(results) {
-    results.items.forEach(function(userObj) {
-      self.doDelve(userObj);
-    })
-  };
-
+    };
+  self.isRevealed = function(userObj) {
+    return self.currentReveal === userObj;
+  }
 }]);

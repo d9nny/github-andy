@@ -1,7 +1,7 @@
 githubUserSearch.factory('Search', ['$http', function($http) {
 
   var queryUrl = 'https://api.github.com/search/users';
-  var delveUrl = 'https://api.github.com/users/';
+  var revealUrl = 'https://api.github.com/users/';
   return {
     query: function(searchTerm) {
       return $http({
@@ -13,9 +13,9 @@ githubUserSearch.factory('Search', ['$http', function($http) {
       });
     },
 
-    delve: function(userObj) {
+    reveal: function(userObj) {
       return $http({
-        url: delveUrl + userObj.login,
+        url: revealUrl + userObj.login,
         method: 'GET'
       });
     }
