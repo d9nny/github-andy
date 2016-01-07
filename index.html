@@ -38,19 +38,20 @@
       <ul id="indResults" class='nav nav-pills'>
         <li id="menu" ng-class='{ active: searchCtrl.isActive(1) }' ng-click='searchCtrl.setTab(1)'>User Info</p></li>
         <li id="menu" ng-class='{ active: searchCtrl.isActive(2) }' ng-click='searchCtrl.setTab(2)'>Repos</p></li>
-        <li id="menu" ng-class='{ active: searchCtrl.isActive(3) }' ng-click='searchCtrl.setTab(3)'>Commits</p></li>
+        <li id="menu" ng-class='{ active: searchCtrl.isActive(3) }' ng-click='searchCtrl.setTab(3)'>People</p></li>
       </ul>
       <div class="results">
         <div ng-show='searchCtrl.isActive(1)'>
           <p>Real name: {{searchCtrl.currentReveal.name}}</p>
-          <p>Location: {{user.location}}</p>
+          <p>Location: {{searchCtrl.currentReveal.location}}</p>
         </div>
         <div ng-show='searchCtrl.isActive(2)'>
-          <p>Repo count: {{user.public_repos}}</p>
-          <p>Repo Link:<a ng-href="{{user.repos_url">{{user.repos_url}}</a></p>
+          <p>Repo count: {{searchCtrl.currentReveal.public_repos}}</p>
+          <p>Repo Link:<a ng-href="{{user.repos_url">{{searchCtrl.currentReveal.repos_url}}</a></p>
         </div>
         <div ng-show='searchCtrl.isActive(3)'>
-          <p>Score: {{user.score}}</p>
+          <p>Followers: {{searchCtrl.currentReveal.followers}}</p>
+          <p>Following: {{searchCtrl.currentReveal.following}}</p>          
         </div>
       </div>
     </div>
