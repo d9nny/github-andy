@@ -1,48 +1,61 @@
 <!doctype html>
 <html lang="en" ng-app="GitUserSearch">
-  <head>
-    <meta charset="utf-8">
-    <title>Github user search</title>
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="css/app.css">
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/gitUserSearchController.js"></script>
-    <script src="js/searchFactory.js"></script>
+<head>
+  <meta charset="utf-8">
+  <title>Github user search</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/gitUserSearchController.js"></script>
+  <script src="js/searchFactory.js"></script>
+</head>
 
-  </head>
+<header>
+  <h1>GitHub User Search</h1>
+</header>
 
-  <body ng-controller="GitUserSearchController as searchCtrl">
-    <div >
+<body ng-controller="GitUserSearchController as searchCtrl">
+  <div class='container' >
+    <h3>Please type in a GitHub Username...</h3>
+    <div class="containerOne">
       <form class="form-horizontal" name='myForm'>
         <input type="text" name='mySearch' ng-model="searchCtrl.searchTerm" ng-change="myForm.mySearch.$valid && searchCtrl.doSearch()" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }" required>
         <button class="btn" ng-click="searchCtrl.doSearch()">Search</button>
       </form>
-        <ul class="list-group">
-          <li ng-repeat="user in searchCtrl.searchResult.items">
-            <img ng-src="{{user.avatar_url}}&s=50">
-            <p ng-model='searchCtrl.username' ng-click='searchCtrl.apiCall(user.url) ; searchCtrl.reveal(user)'>{{user.login}}</p>
-            <ul ng-show='searchCtrl.isRevealed(user)' class='nav nav-pills'>
-              <li ng-class='{ active: searchCtrl.isActive(1) }' ng-click='searchCtrl.setTab(1)'>User Info</p></li>
-              <li ng-class='{ active: searchCtrl.isActive(2) }' ng-click='searchCtrl.setTab(2)'>Repos</p></li>
-              <li ng-class='{ active: searchCtrl.isActive(3) }' ng-click='searchCtrl.setTab(3)'>Commits</p></li>
-            </ul>
-              <div ng-show='searchCtrl.isActive(1)'>
-                <p>Real name: {{user.name}}</p>
-                <p>Location: {{user.location}}</p>
-              </div>
-              <div ng-show='searchCtrl.isActive(2)'>
-                <p>Repo count: {{user.public_repos}}</p>
-                <p>Repo Link:<a ng-href="{{user.repos_url">{{user.repos_url}}</a></p>
-              </div>
-              <div ng-show='searchCtrl.isActive(3)'>
-                <p>Score: {{user.name}}</p>
-              </div>
 
-          </li>
-        </ul>
+      <ul class="list-group">
+        <li ng-repeat="user in searchCtrl.searchResult.items">
+          <img ng-src="{{user.avatar_url}}&s=50" ng-click='searchCtrl.apiCall(user.url) ; searchCtrl.setSelected(1)'>
+          <p ng-model='searchCtrl.username' ng-click='searchCtrl.apiCall(user.url) ; searchCtrl.setSelected(1)'>{{user.login}}</p>
+        </li>
+      </ul>
     </div>
-  </body>
+
+    <div class='containerTwo' ng-show='searchCtrl.selected()'>
+      <ul id="indResults" class='nav nav-pills'>
+        <li id="menu" ng-class='{ active: searchCtrl.isActive(1) }' ng-click='searchCtrl.setTab(1)'>User Info</p></li>
+        <li id="menu" ng-class='{ active: searchCtrl.isActive(2) }' ng-click='searchCtrl.setTab(2)'>Repos</p></li>
+        <li id="menu" ng-class='{ active: searchCtrl.isActive(3) }' ng-click='searchCtrl.setTab(3)'>Commits</p></li>
+      </ul>
+      <div class="results">
+        <div ng-show='searchCtrl.isActive(1)'>
+          <p>Real name: {{searchCtrl.currentReveal.name}}</p>
+          <p>Location: {{user.location}}</p>
+        </div>
+        <div ng-show='searchCtrl.isActive(2)'>
+          <p>Repo count: {{user.public_repos}}</p>
+          <p>Repo Link:<a ng-href="{{user.repos_url">{{user.repos_url}}</a></p>
+        </div>
+        <div ng-show='searchCtrl.isActive(3)'>
+          <p>Score: {{user.score}}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
 </html>

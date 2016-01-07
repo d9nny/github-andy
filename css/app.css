@@ -1,4 +1,111 @@
 li > img {
-  width: 50px;
+  width: 100px;
+  height: 100px;
+}
+
+html {
+	    font-family: inherit;
+	color: #686868;
+}
+
+h1 {
+  padding: 20px;
+  text-align: center;
+  font-size: 70px;
+  font-weight: 100;
+}
+
+h3 {
+  padding: 20px 0px;
+  text-align: left;
+  font-size: 30px;
+  font-weight: 100;
+}
+
+#indResults {
+	left: 200px;
+}
+
+.container {
+	width: 900px;
+	position: relative;
+	padding-left: 0px;
+}
+
+.containerOne {
+	background-color: #A1F66D;
+	width: 330px;
+	position: absolute;
+	left: 0px;
+	text-align: center;
+	padding-top: 20px;
+	list-style-type: none;
+	border-radius: 10px;
+}
+
+
+li#menu.active {
+	background-color: #F8EC51;
+	border-radius: 10px;
+}
+
+.containerTwo {
+	background-color: #8EF251;
+	text-align: left;
+	width: 499px;
+	position: absolute;
+	right: 0px;
+	border-radius: 10px;
+}
+
+#menu {
+	padding: 20px 40px;
+	text-align: center;
+}
+
+li, ul {
+	list-style-type: none;
+}
+
+li {
+	  font-size: 26px;
+    font-weight: 100;
+    cursor: pointer; 
+}
+
+.indResults {
+	margin-left: 1px;
+}
+
+.ng-scope {
+	padding-top: 20px;
+  padding-bottom: 0px;
+}
+
+.results {
+  padding: 20px 20px 15px 20px;
+  font-size: 22px;
+  font-weight: 100;	
+}
+
+input {
   height: 50px;
+  border-radius: 8px;
+  border: none;
+  width: 200px;
+  font-size: 18px;
+  font-weight: 100;
+  padding-left: 15px;
+}
+
+button, .btn {
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  margin-left: 15px;
+  width: 75px;
+  background-color: white;
+  font-size: 18px;
+  font-weight: 100;
+}
 }
